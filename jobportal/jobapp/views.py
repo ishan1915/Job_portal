@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm,UserDetailForm
+from .models import UserDetail
 
 # User Signup (Registration) view
 def signup(request):
@@ -41,10 +42,30 @@ def user_login(request):
 # User Logout view
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('user_login')
 
 def admin_view(request):
-    return render(request,'admin_view.html')
+    try:
+        user_detail=UserDetail.objects.get(user=request.user)
+    except  UserDetail.DoesNotExist:
+        user_detail = None    
+    return render(request,'admin_view.html',{'user_detail':user_detail})
+
+def admin_edit(request,user_id):
+    try:
+        user_detail = UserDetail.objects.get(id=user_id,user=request.user)
+    except UserDetail.DoesNotExist:
+        user_detail = UserDetail(user=request.user)
+    
+    if request.method == 'POST':
+        form = UserDetailForm(request.POST, request.FILES ,instance=user_detail)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_view')  # Redirect to profile view after editing
+    else:
+        form = UserDetailForm(instance=user_detail)
+    
+    return render(request, 'admin_edit.html', {'form': form})
 
 def candidate_view(request):
     return render(request,'candidate_view.html')
