@@ -68,4 +68,26 @@ def admin_edit(request,user_id):
     return render(request, 'admin_edit.html', {'form': form})
 
 def candidate_view(request):
-    return render(request,'candidate_view.html')
+    try:
+        user_detail=UserDetail.objects.get(user=request.user)
+    except  UserDetail.DoesNotExist:
+        user_detail = None    
+    return render(request,'candidate_view.html',{'user_detail':user_detail})
+
+
+
+def candidate_edit(request,user_id):
+    try:
+        user_detail = UserDetail.objects.get(id=user_id,user=request.user)
+    except UserDetail.DoesNotExist:
+        user_detail = UserDetail(user=request.user)
+    
+    if request.method == 'POST':
+        form = UserDetailForm(request.POST, request.FILES ,instance=user_detail)
+        if form.is_valid():
+            form.save()
+            return redirect('candidate_view')  # Redirect to profile view after editing
+    else:
+        form = UserDetailForm(instance=user_detail)
+    
+    return render(request, 'candidate_edit.html', {'form': form})

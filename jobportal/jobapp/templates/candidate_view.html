@@ -1,2 +1,32 @@
 candidate 
+
+{% load static %}
 <a href="{% url 'user_logout' %}">Logout</a>
+
+<div class="main">
+    <div class="details">
+   {% block content %}
+  
+     <h2>Profile</h2>
+     {% if user_detail %}
+         <p>First Name: {{ user_detail.firstname }}</p>
+         <p>Last Name: {{ user_detail.lastname }}</p>
+         <p>Contact: {{ user_detail.contact }}</p>
+         <p>Address: {{ user_detail.address }}</p>
+         <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+
+        
+         
+         
+     {% else %}
+         <p>No profile details found.</p>
+                  <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+          
+         
+ 
+ 
+     {% endif %}
+   
+    </div>
+
+    {%endblock%}

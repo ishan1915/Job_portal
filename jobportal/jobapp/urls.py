@@ -15,6 +15,8 @@ urlpatterns = [
 
 
     path('candidate_view',views.candidate_view,name='candidate_view'),
+    path('candidate_edit/<int:user_id>/',views.candidate_edit,name='candidate_edit'),
+
 
 
 ]
