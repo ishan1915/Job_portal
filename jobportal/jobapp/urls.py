@@ -18,5 +18,10 @@ urlpatterns = [
     path('candidate_edit/<int:user_id>/',views.candidate_edit,name='candidate_edit'),
 
 
+    path('resume_edit/',views.resume_edit,name='resume_edit'),
+    path('resume_view/',views.resume_view,name='resume_view'),
+
+
+
 
 ]

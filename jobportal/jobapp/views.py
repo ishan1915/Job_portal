@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
-from .forms import SignupForm, LoginForm,UserDetailForm
-from .models import UserDetail
+from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm
+from .models import UserDetail,Resume,Skill
 
 # User Signup (Registration) view
 def signup(request):
@@ -91,3 +91,31 @@ def candidate_edit(request,user_id):
         form = UserDetailForm(instance=user_detail)
     
     return render(request, 'candidate_edit.html', {'form': form})
+
+
+def resume_edit(request):
+    try:
+        resume = Resume.objects.get(user=request.user)
+    except Resume.DoesNotExist:
+        resume = Resume(user=request.user)
+
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, instance=resume)
+        if form.is_valid():
+            form.save()
+            return redirect('resume_view')  # Redirect to a page that shows the resume after saving
+        else:
+            print(form.errors)  # To check any validation errors
+    else:
+        form = ResumeForm(instance=resume)
+
+    return render(request, 'resume_edit.html', {'form': form})
+
+ 
+def resume_view(request):
+    try:
+        resume = Resume.objects.get(user=request.user)
+    except Resume.DoesNotExist:
+        resume = None  # If the user doesn't have a resume yet, set resume to None
+
+    return render(request, 'resume_view.html', {'resume': resume})
