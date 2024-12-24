@@ -21,6 +21,9 @@ urlpatterns = [
     path('resume_edit/',views.resume_edit,name='resume_edit'),
     path('resume_view/',views.resume_view,name='resume_view'),
 
+    path('add_education/',views.add_education,name='add_education'),
+
+
 
 
 

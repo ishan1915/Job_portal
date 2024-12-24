@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth import logout
-from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm
-from .models import UserDetail,Resume,Skill
+from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm
+from .models import UserDetail,Resume,Skill,Education
 
 # User Signup (Registration) view
 def signup(request):
@@ -119,3 +121,33 @@ def resume_view(request):
         resume = None  # If the user doesn't have a resume yet, set resume to None
 
     return render(request, 'resume_view.html', {'resume': resume})
+
+
+
+
+
+def add_education(request):
+    # Get the logged-in user
+    user = request.user
+    
+    # Check if there are any existing education records
+    existing_education = Education.objects.filter(user=user)
+
+    # If the form is submitted
+    if request.method == 'POST':
+        # Check if the user is editing an existing education record or adding a new one
+        form = EducationForm(request.POST, request.FILES)
+
+        # If the form is valid, save the education record
+        if form.is_valid():
+            education = form.save(commit=False)
+            education.user = user  # Assign the logged-in user to the education record
+            education.save()
+            return redirect('candidate_view')  # Redirect to a page displaying all education records
+    else:
+        # If not a POST request, create an empty form for adding a new education record
+        form = EducationForm()
+
+    # Render the form
+    return render(request, 'add_education.html', {'form': form, 'existing_education': existing_education})
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Education</title>
+</head>
+<body>
+    <h1>Add Education Details</h1>
+
+    <!-- Existing Education Records (if any) -->
+    <h2>Your Education Records</h2>
+    {% if existing_education %}
+        <ul>
+            {% for education in existing_education %}
+                <li>{{ education.degree_name }} - {{ education.university_name }} ({{ education.year_of_passing }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not added any education records yet.</p>
+    {% endif %}
+
+    <!-- Education Form -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Education</button>
+    </form>
+
+</body>
+</html>

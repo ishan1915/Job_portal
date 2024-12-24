@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import UserDetail,Skill,Resume
+from .models import UserDetail,Skill,Resume,Education
+from django.forms import modelformset_factory
+
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -33,3 +35,12 @@ class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = ['name', 'contact', 'email', 'address', 'skills']      
+
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = ['degree_name', 'university_name', 'year_of_passing', 'marks_obtained']
+        
+    def __init__(self, *args, **kwargs):
+        super(EducationForm, self).__init__(*args, **kwargs)      
