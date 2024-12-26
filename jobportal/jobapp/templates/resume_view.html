@@ -10,3 +10,15 @@
         <li>{{ skill.name }}</li>
     {% endfor %}
 </ul>
+
+ <!-- Existing Education Records (if any) -->
+ <h2>Your Education Records</h2>
+ {% if existing_education %}
+     <ul>
+         {% for education in existing_education %}
+             <li>{{ education.degree_name }} - {{ education.university_name }} ({{ education.year_of_passing }})</li>
+         {% endfor %}
+     </ul>
+ {% else %}
+     <p>You have not added any education records yet.</p>
+ {% endif %}

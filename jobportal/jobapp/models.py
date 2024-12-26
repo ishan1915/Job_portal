@@ -38,8 +38,19 @@ class Education(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     degree_name = models.CharField(max_length=100)
     university_name = models.CharField(max_length=100)
-    year_of_passing = models.CharField(max_length=10)  # You can make this a DateField if needed
+    year_of_passing = models.CharField(max_length=10)  
     marks_obtained = models.CharField(max_length=10)
 
     def __str__(self):
         return f"{self.degree_name} - {self.university_name} ({self.year_of_passing})"
+    
+
+class Certification(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE) 
+    certification_name=models.CharField(max_length=30)
+    issued_by=models.CharField(max_length=50)
+    issued_on=models.DateField(null=True)
+    
+    def __str__(self):
+        return f"{self.certification_name}"
+

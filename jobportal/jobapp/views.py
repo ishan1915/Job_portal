@@ -4,8 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import logout
-from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm
-from .models import UserDetail,Resume,Skill,Education
+from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm
+from .models import UserDetail,Resume,Skill,Education,Certification
 
 # User Signup (Registration) view
 def signup(request):
@@ -117,10 +117,12 @@ def resume_edit(request):
 def resume_view(request):
     try:
         resume = Resume.objects.get(user=request.user)
+        existing_education = Education.objects.filter(user=request.user)
+
     except Resume.DoesNotExist:
         resume = None  # If the user doesn't have a resume yet, set resume to None
 
-    return render(request, 'resume_view.html', {'resume': resume})
+    return render(request, 'resume_view.html', {'resume': resume,'existing_education':existing_education})
 
 
 
@@ -151,3 +153,27 @@ def add_education(request):
     # Render the form
     return render(request, 'add_education.html', {'form': form, 'existing_education': existing_education})
 
+def add_certificate(request):
+    # Get the logged-in user
+    user = request.user
+    
+    # Check if there are any existing education records
+    existing_certificate = Certification.objects.filter(user=user)
+
+    # If the form is submitted
+    if request.method == 'POST':
+        # Check if the user is editing an existing education record or adding a new one
+        form = CertificationForm(request.POST, request.FILES)
+
+        # If the form is valid, save the education record
+        if form.is_valid():
+            education = form.save(commit=False)
+            education.user = user  # Assign the logged-in user to the education record
+            education.save()
+            return redirect('candidate_view')  # Redirect to a page displaying all education records
+    else:
+        # If not a POST request, create an empty form for adding a new education record
+        form = CertificationForm()
+
+    # Render the form
+    return render(request, 'add_certification.html', {'form': form, 'existing_certificate': existing_certificate})

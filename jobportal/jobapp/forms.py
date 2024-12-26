@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import UserDetail,Skill,Resume,Education
+from .models import UserDetail,Skill,Resume,Education,Certification
 from django.forms import modelformset_factory
 
 
@@ -44,3 +44,9 @@ class EducationForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(EducationForm, self).__init__(*args, **kwargs)      
+
+
+class CertificationForm(forms.ModelForm):
+    class Meta:
+        model = Certification
+        fields = ['certification_name','issued_by','issued_on']
