@@ -1,0 +1,20 @@
+<!-- job_list.html -->
+
+{% block content %}
+    <h1>Job Listings</h1>
+    {% if jobs %}
+        <ul>
+            {% for job in jobs %}
+                <li>
+                    <h3>{{ job.title }}</h3>
+                    <p>{{ job.description }}</p>
+                    <p><strong>Location:</strong> {{ job.location }}</p>
+                    <p><strong>Closing Date:</strong> {{ job.closing_date }}</p>
+                    <a href="{% url 'apply_for_job' job.id %}">Apply Now</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No job postings available.</p>
+    {% endif %}
+{% endblock %}

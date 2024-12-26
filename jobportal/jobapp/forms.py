@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from .models import UserDetail,Skill,Resume,Education,Certification
+from .models import Job,Application
 from django.forms import modelformset_factory
 
 
@@ -50,3 +51,17 @@ class CertificationForm(forms.ModelForm):
     class Meta:
         model = Certification
         fields = ['certification_name','issued_by','issued_on']
+
+
+
+class JobForm(forms.ModelForm):
+    class Meta:
+        model=Job
+        fields=['title','description','location','posted_on','closed_on']
+
+
+
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model=Application
+        fields=['name','aadhar']         

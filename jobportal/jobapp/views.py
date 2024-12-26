@@ -4,8 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import logout
-from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm
-from .models import UserDetail,Resume,Skill,Education,Certification
+from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm
+from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application
 
 # User Signup (Registration) view
 def signup(request):
@@ -154,19 +154,15 @@ def add_education(request):
     return render(request, 'add_education.html', {'form': form, 'existing_education': existing_education})
 
 def add_certificate(request):
-    # Get the logged-in user
     user = request.user
     
-    # Check if there are any existing education records
     existing_certificate = Certification.objects.filter(user=user)
 
-    # If the form is submitted
+    
     if request.method == 'POST':
-        # Check if the user is editing an existing education record or adding a new one
-        form = CertificationForm(request.POST, request.FILES)
+         form = CertificationForm(request.POST, request.FILES)
 
-        # If the form is valid, save the education record
-        if form.is_valid():
+         if form.is_valid():
             education = form.save(commit=False)
             education.user = user  # Assign the logged-in user to the education record
             education.save()
@@ -177,3 +173,71 @@ def add_certificate(request):
 
     # Render the form
     return render(request, 'add_certification.html', {'form': form, 'existing_certificate': existing_certificate})
+
+
+
+
+
+ 
+
+# Create Job Posting (for companies)
+@login_required
+def post_job(request):
+    if request.method == 'POST':
+        form = JobForm(request.POST)
+        if form.is_valid():
+            job = form.save(commit=False)
+            job.company = request.user  # The logged-in company posts the job
+            job.save()
+            return redirect('job_list')  # Redirect to the job listing page
+    else:
+        form = JobForm()
+
+    return render(request, 'post_job.html', {'form': form})
+
+# View Job Listings (for candidates)
+def job_list(request):
+    jobs = Job.objects.all()  # Get all jobs
+    return render(request, 'job_list.html', {'jobs': jobs})
+
+# Apply for Job (for candidates)
+@login_required
+def apply_for_job(request, job_id):
+    job = get_object_or_404(Job, id=job_id)
+
+    # Check if the user is not the company posting the job
+    if request.user == job.company:
+        return redirect('company_dashboard')  # Prevent company from applying to their own job
+
+    # Handle form submission
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            # Create the application object and assign the job and candidate fields
+            application = form.save(commit=False)
+            application.job = job
+            application.candidate = request.user
+            application.save()
+
+            # Redirect to a success page or back to job listings
+            return redirect('job_list')  # Change this URL name if needed
+
+    else:
+        form = ApplicationForm()
+
+    return render(request, 'apply_for_job.html', {'form': form, 'job': job})
+
+# Company View (to view applicants)
+@login_required
+def company_dashboard(request):
+    jobs = Job.objects.filter(company=request.user)  # Get jobs posted by the logged-in company
+    applicants = {}
+    
+    for job in jobs:
+        # Get applications for each job
+        applicants_for_job = Application.objects.filter(job=job)
+
+        # Add applicants for this job to the dictionary
+        applicants[job] = applicants_for_job
+
+    return render(request, 'company_dashboard.html', {'jobs': jobs, 'applicants': applicants})

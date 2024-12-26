@@ -54,3 +54,29 @@ class Certification(models.Model):
     def __str__(self):
         return f"{self.certification_name}"
 
+
+
+class Job(models.Model):
+    company=models.ForeignKey(User,on_delete=models.CASCADE)
+    title=models.CharField(max_length=20)
+    description=models.TextField()
+    location=models.CharField(max_length=20)
+    posted_on=models.DateTimeField()
+    closed_on=models.DateTimeField()
+
+    def __str__(self):
+        return self.title
+    
+
+
+
+class Application(models.Model):
+    job=models.ForeignKey(Job,on_delete=models.CASCADE)
+    candidate=models.ForeignKey(User,on_delete=models.CASCADE)
+    name=models.CharField(max_length=100)#name as per govtid/certificate
+    aadhar=models.CharField(max_length=12)
+    applied_on=models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return f"{self.candidate.username} - {self.job.title}"    
