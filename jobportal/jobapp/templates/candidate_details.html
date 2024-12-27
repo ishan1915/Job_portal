@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details of {{ resume.name }}</title>
+</head>
+<body>
+    <h1>Details of {{ resume.name }}</h1>
+    <h2>Contact Information:</h2>
+    <p>Contact: {{ resume.contact }}</p>
+    <p>Email: {{ resume.email }}</p>
+    <p>Address: {{ resume.address }}</p>
+
+    <h2>Skills:</h2>
+    <ul>
+        {% for skill in resume.skills.all %}
+            <li>{{ skill.name }}</li>
+        {% empty %}
+            <li>No skills listed.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Application Details:</h2>
+    <p>Applied for Job: {{ application.job.title }}</p>
+    <p>Applied on: {{ application.applied_on }}</p>
+
+    <a href="{% url 'job_applicants' application.job.id %}">Back to Applicants</a>
+</body>
+</html>

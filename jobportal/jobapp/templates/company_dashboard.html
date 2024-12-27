@@ -1,38 +1,21 @@
-<!-- company_dashboard.html -->
- 
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard</title>
+</head>
+<body>
     <h1>Company Dashboard</h1>
-
-    <h2>My Job Postings</h2>
-    {% if jobs %}
-        <ul>
-            {% for job in jobs %}
-                <li>
-                    <h3>{{ job.title }}</h3>
-                    <p>{{ job.description }}</p>
-                    <p><strong>Location:</strong> {{ job.location }}</p>
-                    <p><strong>Closing Date:</strong> {{ job.closing_date }}</p>
-
-                    <h4>Applicants:</h4>
-                    {% if applicants.job %}
-                        <ul>
-                            {% for application in applicants.job %}
-                                <li>
-                                    <strong>{{ application.candidate.username }}</strong><br>
-                                    <p><strong>Name:</strong> {{ application.name }}</p>
-                                    <p><strong>Aadhar:</strong> {{ application.aadhar }}</p>
-                                </li>
-                            {% empty %}
-                                <p>No applicants yet.</p>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p>No applicants yet.</p>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>You haven't posted any jobs yet.</p>
-    {% endif %}
-{% endblock %}
+    <h2>Your Jobs:</h2>
+    <ul>
+        {% for job in jobs %}
+            <li>
+                <a href="{% url 'job_applicants' job.id %}">{{ job.title }}</a> - Posted on {{ job.posted_on }}
+            </li>
+        {% empty %}
+            <li>No jobs posted yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

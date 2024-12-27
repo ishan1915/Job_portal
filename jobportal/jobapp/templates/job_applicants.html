@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicants for {{ job.title }}</title>
+</head>
+<body>
+    <h1>Applicants for {{ job.title }}</h1>
+    <h2>Job Description:</h2>
+    <p>{{ job.description }}</p>
+    
+    <h2>Applicants:</h2>
+    <ul>
+        {% for application in applications %}
+            <li>
+                <a href="{% url 'candidate_details' application.id %}">{{ application.name }} ({{ application.candidate.username }})</a> - Applied on {{ application.applied_on }}
+            </li>
+        {% empty %}
+            <li>No applications yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'company_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
