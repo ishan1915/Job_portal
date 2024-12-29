@@ -1,42 +1,41 @@
-candidate 
-
 {% load static %}
-<a href="{% url 'user_logout' %}">Logout</a>
-<a href="{% url 'resume_view' %}">resume view</a>
-<a href="{% url 'resume_edit' %}">resume Edit</a>
-<a href="{% url 'add_education' %}">Add education</a>
-<a href="{% url 'add_certification' %}">Add certificate</a>
-<a href="{% url 'job_list' %}">Job list</a>
 
 
-
-
-
-
-<div class="main">
-    <div class="details">
-   {% block content %}
-  
-     <h2>Profile</h2>
-     {% if user_detail %}
-         <p>First Name: {{ user_detail.firstname }}</p>
-         <p>Last Name: {{ user_detail.lastname }}</p>
-         <p>Contact: {{ user_detail.contact }}</p>
-         <p>Address: {{ user_detail.address }}</p>
-         <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
-
-        
-         
-         
-     {% else %}
-         <p>No profile details found.</p>
-                  <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
-          
-         
- 
- 
-     {% endif %}
-   
-    </div>
-
-    {%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Profile</title>
+    <link rel="stylesheet" href="{% static 'jobapp/style1.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'user_logout' %}">Logout</a>
+            <a href="{% url 'resume_view' %}">resume view</a>
+            <a href="{% url 'resume_edit' %}">resume Edit</a>
+            <a href="{% url 'add_education' %}">Add education</a>
+            <a href="{% url 'add_certification' %}">Add certificate</a>
+            <a href="{% url 'job_list' %}">Job list</a>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="details">
+            {% block content %}
+                <h2>Profile</h2>
+                {% if user_detail %}
+                    <p>First Name: {{ user_detail.firstname }}</p>
+                    <p>Last Name: {{ user_detail.lastname }}</p>
+                    <p>Contact: {{ user_detail.contact }}</p>
+                    <p>Address: {{ user_detail.address }}</p>
+                    <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+                {% else %}
+                    <p>No profile details found.</p>
+                    <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+                {% endif %}
+            {%endblock%}
+        </div>
+    </main>
+</body>
+</html>

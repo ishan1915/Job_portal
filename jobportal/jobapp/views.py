@@ -230,15 +230,9 @@ def apply_for_job(request, job_id):
 # Company View (to view applicants)
 @login_required
 def company_dashboard(request):
-    jobs = Job.objects.filter(company=request.user)  # Get jobs posted by the logged-in company
-    #applicants = {}
+    jobs = Job.objects.filter(company=request.user)  
     
-    #for job in jobs:
-        # Get applications for each job
-       # applicants_for_job = Application.objects.filter(job=job)
-
-        # Add applicants for this job to the dictionary
-       # applicants[job] = applicants_for_job
+     
     
 
     return render(request, 'company_dashboard.html', {
@@ -248,8 +242,7 @@ def company_dashboard(request):
 
 
 
-    #return render(request, 'company_dashboard.html', {'jobs': jobs, 'applicants': applicants})
-
+ 
 
 def job_applicants(request, job_id):
     job = get_object_or_404(Job, id=job_id)
