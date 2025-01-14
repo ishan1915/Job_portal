@@ -263,3 +263,8 @@ def candidate_details(request, application_id):
         'application': application,
         'resume': resume,
     })
+
+
+ 
+
+ 

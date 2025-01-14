@@ -22,7 +22,7 @@ class LoginForm(AuthenticationForm):
 class UserDetailForm(forms.ModelForm):
     class Meta:
         model = UserDetail
-        fields = ['firstname', 'lastname', 'contact', 'email','address',]
+        fields = ['firstname', 'lastname', 'contact', 'email','address','profile_photo']
 
 
 

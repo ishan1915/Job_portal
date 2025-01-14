@@ -29,10 +29,22 @@
                     <p>Last Name: {{ user_detail.lastname }}</p>
                     <p>Contact: {{ user_detail.contact }}</p>
                     <p>Address: {{ user_detail.address }}</p>
+                    {% if user_detail.profile_photo %}
+                            <img src="{{ user_detail.profile_photo.url }}" alt="Profile Photo" class="pp" width="100">
+                        {% else %}
+                            <p>No profile photo uploaded</p>
+                        {% endif %}
                     <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
                 {% else %}
                     <p>No profile details found.</p>
                     <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+
+
+
+                    
+                        
+                    
+                    
                 {% endif %}
             {%endblock%}
         </div>

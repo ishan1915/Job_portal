@@ -9,6 +9,8 @@ class UserDetail(models.Model):
     contact=models.CharField(max_length=20)
     email=models.EmailField(null=True)
     address=models.TextField(null=True)
+    profile_photo = models.ImageField(upload_to='profilephotos/', null=True, blank=True)
+
 
 
     def __str__(self):
