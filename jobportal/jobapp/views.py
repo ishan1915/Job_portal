@@ -1,9 +1,14 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import now
+from django.db.models import Q  
+
 
 from django.contrib.auth import logout
+from django.views import View
 from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm
 from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application
 
@@ -267,4 +272,13 @@ def candidate_details(request, application_id):
 
  
 
- 
+# Search View
+class JobSearchView(View):
+    def get(self, request):
+        query = request.GET.get('query', '')
+        jobs = Job.objects.filter(closed_on__gt=now())
+
+        if query:
+            jobs = jobs.filter(Q(title__icontains=query) | Q(location__icontains=query) | Q(description__icontains=query))
+
+        return render(request, 'search.html', {'jobs': jobs})

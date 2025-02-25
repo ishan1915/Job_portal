@@ -1,24 +1,49 @@
-<h3>{{ resume.user.username }}'s Resume</h3>
-<p>Name: {{ resume.name }}</p>
-<p>Contact: {{ resume.contact }}</p>
-<p>Email: {{ resume.email }}</p>
-<p>Address: {{ resume.address }}</p>
+{% load static %}
 
-<h4>Skills:</h4>
-<ul>
-    {% for skill in resume.skills.all %}
-        <li>{{ skill.name }}</li>
-    {% endfor %}
-</ul>
 
- <!-- Existing Education Records (if any) -->
- <h2>Your Education Records</h2>
- {% if existing_education %}
-     <ul>
-         {% for education in existing_education %}
-             <li>{{ education.degree_name }} - {{ education.university_name }} ({{ education.year_of_passing }})</li>
-         {% endfor %}
-     </ul>
- {% else %}
-     <p>You have not added any education records yet.</p>
- {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ resume.user.username }}'s Resume</title>
+    <link rel="stylesheet" href="{% static 'jobapp/style2.css' %}">> 
+</head>
+
+<body>
+    <div class="container">
+        <h3>{{ resume.user.username }}'s Resume</h3>
+
+        <div class="row">
+            <div class="column">
+                <p><strong>Name:</strong> {{ resume.name }}</p>
+                <p><strong>Contact:</strong> {{ resume.contact }}</p>
+                <p><strong>Email:</strong> {{ resume.email }}</p>
+                <p><strong>Address:</strong> {{ resume.address }}</p>
+            </div>
+
+            <div class="column">
+                <h4>Skills:</h4>
+                <ul>
+                    {% for skill in resume.skills.all %}
+                        <li>{{ skill.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <h2>Your Education Records</h2>
+        {% if existing_education %}
+            <ul>
+                {% for education in existing_education %}
+                    <li>{{ education.degree_name }} - {{ education.university_name }} ({{ education.year_of_passing }})</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not added any education records yet.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

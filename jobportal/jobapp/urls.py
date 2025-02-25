@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import JobSearchView
 
 
 urlpatterns = [
@@ -9,6 +10,8 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.user_login, name='user_login'),
     path('logout/', views.user_logout, name='user_logout'),
+
+    path('search/', JobSearchView.as_view(), name='job_search'),
 
     path('admin_view',views.admin_view,name='admin_view'),
     path('admin_edit/<int:user_id>/',views.admin_edit,name='admin_edit'),

@@ -30,7 +30,7 @@
                     <p>Contact: {{ user_detail.contact }}</p>
                     <p>Address: {{ user_detail.address }}</p>
                     {% if user_detail.profile_photo %}
-                            <img src="{{ user_detail.profile_photo.url }}" alt="Profile Photo" class="pp" width="100">
+                         <div id="pp" > <img src="{{ user_detail.profile_photo.url }}" alt="Profile Photo" class="pp" width="100"> </div>
                         {% else %}
                             <p>No profile photo uploaded</p>
                         {% endif %}
