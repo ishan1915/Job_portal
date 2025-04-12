@@ -282,3 +282,9 @@ class JobSearchView(View):
             jobs = jobs.filter(Q(title__icontains=query) | Q(location__icontains=query) | Q(description__icontains=query))
 
         return render(request, 'search.html', {'jobs': jobs})
+
+
+
+ 
+def home(request):
+    return render(request, 'homepage.html')
