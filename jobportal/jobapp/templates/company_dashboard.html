@@ -1,21 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Dashboard</title>
+    <link rel="stylesheet" href="{% static 'jobapp/companydash.css' %}">
 </head>
 <body>
-    <h1>Company Dashboard</h1>
-    <h2>Your Jobs:</h2>
-    <ul>
-        {% for job in jobs %}
-            <li>
-                <a href="{% url 'job_applicants' job.id %}">{{ job.title }}</a> - Posted on {{ job.posted_on }}
-            </li>
-        {% empty %}
-            <li>No jobs posted yet.</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Company Dashboard</h1>
+        <h2>Your Jobs</h2>
+        <ul class="job-list">
+            {% for job in jobs %}
+                <li>
+                    <a href="{% url 'job_applicants' job.id %}">{{ job.title }}</a>
+                    <span class="posted-date">Posted on {{ job.posted_on }}</span>
+                </li>
+            {% empty %}
+                <li class="empty">No jobs posted yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

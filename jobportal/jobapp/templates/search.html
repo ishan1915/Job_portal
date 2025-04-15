@@ -26,8 +26,8 @@
     <main class="main-content">
         <h1>Search Jobs</h1>
 
-        <form method="GET" action="{% url 'job_search' %}">
-            <input type="text" name="q" placeholder="Search jobs..." value="{{ request.GET.q }}">
+        <form method="GET" action="">
+            <input type="text" name="query" placeholder="Search jobs..." value="{{ request.GET.query }}">
             <button type="submit">Search</button>
         </form>
 

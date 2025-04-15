@@ -1,31 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Education</title>
+    <link rel="stylesheet" href="{% static 'jobapp/education.css' %}">
 </head>
 <body>
-    <h1>Add Education Details</h1>
+    <div class="container">
+        <h1>Add Education Details</h1>
 
-    <!-- Existing Education Records (if any) -->
-    <h2>Your Education Records</h2>
-    {% if existing_education %}
-        <ul>
-            {% for education in existing_education %}
-                <li>{{ education.degree_name }} - {{ education.university_name }} ({{ education.year_of_passing }})</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>You have not added any education records yet.</p>
-    {% endif %}
+        <!-- Existing Education Records (if any) -->
+        <div class="existing-education">
+            <h2>Your Education Records</h2>
+            {% if existing_education %}
+                <ul>
+                    {% for education in existing_education %}
+                        <li>{{ education.degree_name }} - {{ education.university_name }} ({{ education.year_of_passing }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You have not added any education records yet.</p>
+            {% endif %}
+        </div>
 
-    <!-- Education Form -->
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Education</button>
-    </form>
-
+        <!-- Education Form -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Education</button>
+        </form>
+    </div>
 </body>
 </html>

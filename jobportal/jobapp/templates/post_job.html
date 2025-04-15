@@ -1,5 +1,18 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Post Job</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Candidate</title>
+    <link rel="stylesheet" href="{% static 'jobapp/edit_candidate.css' %}">
+</head>
+<body>
+    <div class="form-wrapper">
+        <h2>Post Job</h2>
+        <form method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

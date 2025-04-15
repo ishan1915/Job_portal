@@ -1,25 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applicants for {{ job.title }}</title>
+    <link rel="stylesheet" href="{% static 'jobapp/applicants.css' %}">
 </head>
 <body>
-    <h1>Applicants for {{ job.title }}</h1>
-    <h2>Job Description:</h2>
-    <p>{{ job.description }}</p>
-    
-    <h2>Applicants:</h2>
-    <ul>
-        {% for application in applications %}
-            <li>
-                <a href="{% url 'candidate_details' application.id %}">{{ application.name }} ({{ application.candidate.username }})</a> - Applied on {{ application.applied_on }}
-            </li>
-        {% empty %}
-            <li>No applications yet.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'company_dashboard' %}">Back to Dashboard</a>
+    <div class="container">
+        <h1>Applicants for <span>{{ job.title }}</span></h1>
+
+        <div class="job-desc">
+            <h2>Job Description</h2>
+            <p>{{ job.description }}</p>
+        </div>
+
+        <div class="applicants">
+            <h2>Applicants</h2>
+            <ul>
+                {% for application in applications %}
+                    <li>
+                        <a href="{% url 'candidate_details' application.id %}">
+                            {{ application.name }} ({{ application.candidate.username }})
+                        </a>
+                        <span class="applied-date">Applied on {{ application.applied_on }}</span>
+                    </li>
+                {% empty %}
+                    <li class="empty">No applications yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="back-link">
+            <a href="{% url 'company_dashboard' %}">← Back to Dashboard</a>
+        </div>
+    </div>
 </body>
 </html>

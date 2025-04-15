@@ -37,7 +37,7 @@ class Resume(models.Model):
 
 
 class Education(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     degree_name = models.CharField(max_length=100)
     university_name = models.CharField(max_length=100)
     year_of_passing = models.CharField(max_length=10)  

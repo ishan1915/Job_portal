@@ -8,12 +8,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ resume.user.username }}'s Resume</title>
-    <link rel="stylesheet" href="{% static 'jobapp/style2.css' %}">> 
+    <link rel="stylesheet" href="{% static 'jobapp/style2.css' %}">
 </head>
 
 <body>
     <div class="container">
-        <h3>{{ resume.user.username }}'s Resume</h3>
+        <h3>{{ resume.user.resume.name }}'s Resume</h3>
 
         <div class="row">
             <div class="column">

@@ -1,9 +1,13 @@
+{%load static%}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'jobapp/signup.css' %}">
+
 </head>
 <body>
+    <div class="login-container">
     <h1>Signup</h1>
     <form method="POST">
         {% csrf_token %}
@@ -11,5 +15,6 @@
         <button type="submit">Sign Up</button>
     </form>
     <p>Already have an account? <a href="{% url 'user_login' %}">Login here</a></p>
+    </div>
 </body>
 </html>
