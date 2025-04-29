@@ -82,3 +82,16 @@ class Application(models.Model):
 
     def __str__(self):
         return f"{self.candidate.username} - {self.job.title}"    
+    
+
+
+
+
+class ContactUs(models.Model):
+    name=models.CharField(max_length=20)
+    email=models.EmailField(null=True)
+    phone=models.CharField(null=True,max_length=10)
+    topic=models.TextField()
+
+    def __str__(self):
+        return f"{self.name} - {self.email} - {self.phone} S- {self.topic}"

@@ -1,0 +1,73 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'jobapp/contact.css' %}">
+    <title>Contact Us</title>
+</head>
+<body>
+     <!-- Navbar -->
+     <nav class="navbar">
+        <div class="nav-brand">JobPortal</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'job_search' %}">Jobs</a></li>
+
+            <li><a href="{% url 'user_login' %}">Login</a></li>
+
+            <li><a href="{% url 'signup' %}">Register</a></li>
+            <li><a href="{% url 'signup' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+
+    <h2>Contact Us</h2>
+    <div class="conc">
+        <h3>Contact Details:</h3>
+        <p><strong>JobPortal Ltd</strong></p>
+        <p><strong>Address:</strong>  </p>
+        <p><strong>Email:</strong> contact@jobportal.com</p>
+        <p><strong>Phone:</strong> +123 456 789</p>
+        <p><strong>Pin:</strong> 123456</p>
+    </div>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send Message</button>
+    </form>
+
+
+     <!-- Footer -->
+     <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <h3>JobPortal</h3>
+                <p>Your gateway to a better career.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Companies</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 JobPortal. All rights reserved.</div>
+    </footer>
+ 
+
+</body>
+</html>

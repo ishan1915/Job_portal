@@ -35,6 +35,12 @@ urlpatterns = [
     path('company_dashboard/', views.company_dashboard, name='company_dashboard'),
     path('job/<int:job_id>/applicants/', views.job_applicants, name='job_applicants'),
     path('application/<int:application_id>/details/', views.candidate_details, name='candidate_details'),
+    
+    path('contact/', views.contact_view, name='contact'),
+    path('adminlogin/', views.admin_login_view, name='admin_login'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
+
+
 
 
 

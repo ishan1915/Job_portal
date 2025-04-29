@@ -5,14 +5,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from django.db.models import Q  
-
-
+from django.contrib import messages
 from django.contrib.auth import logout
 from django.views import View
-from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm
-from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application
+from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm,ContactForm,AdminLoginForm
+from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application,ContactUs
+from django.contrib.auth.decorators import user_passes_test
 
-# User Signup (Registration) view
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -25,7 +26,6 @@ def signup(request):
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
 
-# User Login view
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
@@ -46,7 +46,7 @@ def user_login(request):
 
     return render(request, 'login.html', {'form': form})
 
-# User Logout view
+
 def user_logout(request):
     logout(request)
     return redirect('user_login')
@@ -281,3 +281,47 @@ class JobSearchView(View):
  
 def home(request):
     return render(request, 'homepage.html')
+
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            topic = form.cleaned_data['topic']
+
+            ContactUs.objects.create(name=name, email=email, phone=phone,topic=topic)
+
+            return render(request, 'success.html')
+
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact_form.html', {'form': form})
+
+
+
+def admin_login_view(request):
+    if request.method == 'POST':
+        form = AdminLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.is_superuser:
+                login(request, user)
+                return redirect('admin_dashboard')  # change to your admin dashboard URL name
+            else:
+                messages.error(request, 'You must be a superuser to log in.')
+    else:
+        form = AdminLoginForm()
+
+    return render(request, 'admin_login.html', {'form': form})
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_dashboard(request):
+    contacts = ContactUs.objects.all()
+    return render(request, 'admin_dashboard.html', {'contacts': contacts})
