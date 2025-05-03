@@ -8,9 +8,11 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.views import View
-from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm,ContactForm,AdminLoginForm
-from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application,ContactUs
+from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm,ContactForm,AdminLoginForm,CompanyRegistrationForm
+from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application,ContactUs,Company
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 
 
@@ -325,3 +327,29 @@ def admin_login_view(request):
 def admin_dashboard(request):
     contacts = ContactUs.objects.all()
     return render(request, 'admin_dashboard.html', {'contacts': contacts})
+
+
+
+def company_registration(request):
+    if request.method == 'POST':
+        form = CompanyRegistrationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  # Save the company to the database
+            return render(request, 'success.html')
+
+    else:
+         form = CompanyRegistrationForm()
+
+    return render(request, 'company_registration.html', {'form': form})
+
+
+
+
+
+
+
+
+@staff_member_required
+def company_list(request):
+    companies = Company.objects.all().order_by('-created_at')
+    return render(request, 'company_list.html', {'companies': companies})

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from .models import UserDetail,Skill,Resume,Education,Certification
-from .models import Job,Application,ContactUs
+from .models import Job,Application,ContactUs,Company
 from django.forms import modelformset_factory
 
 
@@ -77,3 +77,10 @@ class ContactForm(forms.ModelForm):
 class AdminLoginForm(forms.Form):
     username = forms.CharField(label="Username")
     password = forms.CharField(widget=forms.PasswordInput, label="Password")        
+
+
+
+class CompanyRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ['name', 'email', 'phone', 'website', 'address', 'description', 'logo']    

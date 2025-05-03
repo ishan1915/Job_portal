@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Companies</title>
+    <link rel="stylesheet" href="{% static 'jobapp/companylist.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2> Companies List</h2>
+        {% if companies %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Website</th>
+                        <th>Registered On</th>
+                        <th>Address</th>
+                        <th>logo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.email }}</td>
+                        <td>{{ company.phone }}</td>
+                        <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>
+                        <td>{{ company.created_at|date:"F d, Y H:i" }}</td>
+                        <td>{{ company.address}}</td>
+                        <td>{%if company.logo%}
+                            <div id="pp" > <img src="{{ company.logo.url }}" alt="logo" class="pp" width="100"> </div>
+                            {% else %}
+                            <p>No profile photo uploaded</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No companies registered yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
