@@ -9,7 +9,8 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.views import View
 from .forms import SignupForm, LoginForm,UserDetailForm,ResumeForm,EducationForm,CertificationForm,JobForm,ApplicationForm,ContactForm,AdminLoginForm,CompanyRegistrationForm
-from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application,ContactUs,Company
+from .models import UserDetail,Resume,Skill,Education,Certification,Job,Application,ContactUs,Company, Subject, Question, TestResult
+
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -258,10 +259,14 @@ def job_applicants(request, job_id):
 def candidate_details(request, application_id):
     application = get_object_or_404(Application, id=application_id)
     resume = get_object_or_404(Resume, user=application.candidate)
+    edu = Education.objects.filter(user=application.candidate)
+    cert = Certification.objects.filter(user=application.candidate)
 
     return render(request, 'candidate_details.html', {
         'application': application,
         'resume': resume,
+        'edu':edu,
+        'cert':cert
     })
 
 
@@ -353,3 +358,58 @@ def company_registration(request):
 def company_list(request):
     companies = Company.objects.all().order_by('-created_at')
     return render(request, 'company_list.html', {'companies': companies})
+
+
+
+
+@login_required
+def select_subject(request):
+    subjects = Subject.objects.all()
+    return render(request, 'select_subject.html', {'subjects': subjects})
+
+
+
+
+
+@login_required
+def start_test_page(request, subject_id):
+    subject = get_object_or_404(Subject, pk=subject_id)
+    return render(request, 'start_test.html', {'subject': subject})
+
+@login_required
+def start_test(request, subject_id):
+    subject = get_object_or_404(Subject, pk=subject_id)
+    questions = Question.objects.filter(subject=subject).order_by('?')[:30]
+    request.session['question_ids'] = [q.id for q in questions]
+    return render(request, 'test.html', {'subject': subject, 'questions': questions})
+
+@login_required
+def submit_test(request, subject_id):
+    subject = get_object_or_404(Subject, pk=subject_id)
+    question_ids = request.session.get('question_ids', [])
+    questions = Question.objects.filter(id__in=question_ids)
+
+    correct = 0
+    total = questions.count()
+
+    for q in questions:
+        selected = request.POST.get(f'q{q.id}')
+        if selected == q.correct_option:
+            correct += 1
+
+    incorrect = total - correct
+
+    result = TestResult.objects.create(
+        user=request.user,
+        subject=subject,
+        score=correct,
+        correct_count=correct,
+        incorrect_count=incorrect
+    )
+
+    return render(request, 'result.html', {
+        'score': correct,
+        'total': total,
+        'correct_count': correct,
+        'incorrect_count': incorrect
+    })

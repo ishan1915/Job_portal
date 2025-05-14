@@ -1,0 +1,272 @@
+[
+  {
+    "subject_id": 1,
+    "question_text": "What is the output of print(2 ** 3)?",
+    "option_a": "6",
+    "option_b": "8",
+    "option_c": "9",
+    "option_d": "12",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which keyword is used for function in Python?",
+    "option_a": "func",
+    "option_b": "define",
+    "option_c": "def",
+    "option_d": "function",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What is the correct file extension for Python files?",
+    "option_a": ".pyth",
+    "option_b": ".pt",
+    "option_c": ".py",
+    "option_d": ".p",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What is the output of: print(type([1, 2, 3]))",
+    "option_a": "<class 'list'>",
+    "option_b": "<class 'array'>",
+    "option_c": "<class 'set'>",
+    "option_d": "<class 'tuple'>",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which data type is immutable?",
+    "option_a": "list",
+    "option_b": "dictionary",
+    "option_c": "set",
+    "option_d": "tuple",
+    "correct_option": "D"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What will print(\"Hello\" * 2) return?",
+    "option_a": "Hello2",
+    "option_b": "Hello Hello",
+    "option_c": "HelloHello",
+    "option_d": "SyntaxError",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which keyword is used for loops in Python?",
+    "option_a": "for",
+    "option_b": "loop",
+    "option_c": "repeat",
+    "option_d": "iterate",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which of the following is not a Python built-in data type?",
+    "option_a": "dict",
+    "option_b": "list",
+    "option_c": "class",
+    "option_d": "tuple",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which of the following functions converts a string to lowercase?",
+    "option_a": "strlower()",
+    "option_b": "tolower()",
+    "option_c": "lower()",
+    "option_d": "str.lowercase()",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "How do you insert COMMENTS in Python code?",
+    "option_a": "/* comment */",
+    "option_b": "// comment",
+    "option_c": "# comment",
+    "option_d": "-- comment",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which method adds an element to the end of a list?",
+    "option_a": "append()",
+    "option_b": "add()",
+    "option_c": "insert()",
+    "option_d": "push()",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What does len([1, 2, 3]) return?",
+    "option_a": "2",
+    "option_b": "3",
+    "option_c": "1",
+    "option_d": "0",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which statement is used to handle exceptions?",
+    "option_a": "try-except",
+    "option_b": "catch",
+    "option_c": "handle",
+    "option_d": "try-catch",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which of these is not a valid Python loop?",
+    "option_a": "for",
+    "option_b": "while",
+    "option_c": "do-while",
+    "option_d": "None of the above",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which operator is used for exponentiation in Python?",
+    "option_a": "^",
+    "option_b": "**",
+    "option_c": "exp",
+    "option_d": "^^",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What is the output of 10 // 3?",
+    "option_a": "3.33",
+    "option_b": "3",
+    "option_c": "4",
+    "option_d": "Error",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which is a valid way to declare a dictionary?",
+    "option_a": "{1: 'a', 2: 'b'}",
+    "option_b": "[1: 'a', 2: 'b']",
+    "option_c": "(1: 'a', 2: 'b')",
+    "option_d": "{'a', 'b'}",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which Python keyword is used to define a class?",
+    "option_a": "function",
+    "option_b": "define",
+    "option_c": "class",
+    "option_d": "object",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What will `type(10.0)` return?",
+    "option_a": "<class 'int'>",
+    "option_b": "<class 'float'>",
+    "option_c": "<class 'double'>",
+    "option_d": "<class 'number'>",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What is the result of bool(0)?",
+    "option_a": "True",
+    "option_b": "False",
+    "option_c": "0",
+    "option_d": "None",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which of these is a valid variable name in Python?",
+    "option_a": "1variable",
+    "option_b": "variable_1",
+    "option_c": "variable-1",
+    "option_d": "variable 1",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "How do you start a for loop in Python?",
+    "option_a": "for (i=0; i<10; i++)",
+    "option_b": "foreach i in range(10):",
+    "option_c": "for i in range(10):",
+    "option_d": "loop i from 1 to 10:",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which method is used to remove items from a list?",
+    "option_a": "remove()",
+    "option_b": "discard()",
+    "option_c": "popitem()",
+    "option_d": "delete()",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "How do you create a function in Python?",
+    "option_a": "function myFunc():",
+    "option_b": "def myFunc():",
+    "option_c": "create myFunc():",
+    "option_d": "fun myFunc():",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which keyword is used to check if a value exists in a list?",
+    "option_a": "exists",
+    "option_b": "in",
+    "option_c": "within",
+    "option_d": "inside",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which function returns the number of items in a list?",
+    "option_a": "count()",
+    "option_b": "length()",
+    "option_c": "len()",
+    "option_d": "size()",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "How do you write an inline if statement?",
+    "option_a": "if x > 5 then print(x)",
+    "option_b": "print(x) if x > 5 else print(0)",
+    "option_c": "x > 5 ? print(x) : print(0)",
+    "option_d": "inline if x > 5: print(x)",
+    "correct_option": "B"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "What is the output of print('A' + 'B')?",
+    "option_a": "AB",
+    "option_b": "A B",
+    "option_c": "A+B",
+    "option_d": "Error",
+    "correct_option": "A"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which Python function returns the largest item?",
+    "option_a": "maximum()",
+    "option_b": "top()",
+    "option_c": "max()",
+    "option_d": "largest()",
+    "correct_option": "C"
+  },
+  {
+    "subject_id": 1,
+    "question_text": "Which function is used to get input from a user?",
+    "option_a": "read()",
+    "option_b": "get()",
+    "option_c": "input()",
+    "option_d": "scan()",
+    "correct_option": "C"
+  }
+]

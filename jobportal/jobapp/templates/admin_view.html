@@ -9,24 +9,34 @@
 </head>
 <body>
 
-    <!-- Navigation Links -->
+    <!-- Navigation -->
     <div class="navbar">
-        <a href="{% url 'user_logout' %}">Logout</a>
         <a href="{% url 'post_job' %}">Post Job</a>
         <a href="{% url 'company_dashboard' %}">Company Dashboard</a>
+        <a href="{% url 'user_logout' %}">Logout</a>
     </div>
 
-    <!-- Profile Section -->
+    <!-- Main Content -->
     <div class="main">
         <div class="details">
             {% block content %}
             <h2>Profile</h2>
             {% if user_detail %}
-                <p>First Name: {{ user_detail.firstname }}</p>
-                <p>Last Name: {{ user_detail.lastname }}</p>
-                <p>Contact: {{ user_detail.contact }}</p>
-                <p>Address: {{ user_detail.address }}</p>
-                <a class="edit-btn" href="{% url 'admin_edit' user.id %}">Edit Profile</a>
+                <div class="profile-flex">
+                    <div class="profile-info">
+                        <p><strong>Company Name:</strong> {{ user_detail.name }}</p>
+                        <p><strong>Contact:</strong> {{ user_detail.contact }}</p>
+                        <p><strong>Address:</strong> {{ user_detail.address }}</p>
+                        <a class="edit-btn" href="{% url 'admin_edit' user.id %}">Edit Profile</a>
+                    </div>
+                    <div class="profile-photo">
+                        {% if user_detail.profile_photo %}
+                            <img src="{{ user_detail.profile_photo.url }}" alt="Profile Photo" class="pp">
+                        {% else %}
+                            <p>No profile photo uploaded</p>
+                        {% endif %}
+                    </div>
+                </div>
             {% else %}
                 <p>No profile details found.</p>
                 <a class="edit-btn" href="{% url 'admin_edit' user.id %}">Edit Profile</a>

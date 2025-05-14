@@ -5,8 +5,6 @@ from .views import JobSearchView
 
 urlpatterns = [
      
-    
-    # Authentication URLs
     path('', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
     path('login/', views.user_login, name='user_login'),
@@ -42,11 +40,10 @@ urlpatterns = [
 
     path('company-register/', views.company_registration, name='company_register'),
     path('registered-companies/', views.company_list, name='company_list'),
-
-
-
-
-
+    path('test/<int:subject_id>/', views.start_test_page, name='start_test_page'),
+    path('test/<int:subject_id>/start/', views.start_test, name='start_test'),
+    path('test/<int:subject_id>/submit/', views.submit_test, name='submit_test'),
+    path('test/select/', views.select_subject, name='select_subject'),
 
 
 ]

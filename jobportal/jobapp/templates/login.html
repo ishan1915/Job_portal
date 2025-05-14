@@ -3,9 +3,25 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'jobapp/login.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'jobapp/login.css' %}">
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">JobPortal</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'job_search' %}">Jobs</a></li>
+            <li><a href="{% url 'user_login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Register</a></li>
+            <li><a href="{% url 'contact' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'company_register' %}">Company Registration</a></li>
+        </ul>
+    </nav>
+
+    <!-- Login Form -->
     <div class="login-container">
         <h1>Login</h1>
         <form method="POST">
@@ -14,8 +30,7 @@
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
-        <p>Are you Admin! <a href="{% url 'admin_login' %}">Admin Login</a></p>
-
+        <p>Are you Admin? <a href="{% url 'admin_login' %}">Admin Login</a></p>
     </div>
 </body>
 </html>

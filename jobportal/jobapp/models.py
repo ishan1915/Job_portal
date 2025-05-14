@@ -4,8 +4,7 @@ from django.contrib.auth.models import User,AbstractUser
 
 class UserDetail(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    firstname=models.CharField(max_length=100)
-    lastname=models.CharField(max_length=100)
+    name=models.CharField(max_length=100)
     contact=models.CharField(max_length=20)
     email=models.EmailField(null=True)
     address=models.TextField(null=True)
@@ -29,7 +28,7 @@ class Resume(models.Model):
     contact=models.CharField(max_length=10)
     email=models.EmailField(max_length=20,blank=True)
     address=models.CharField(max_length=100)
-    skills = models.ManyToManyField('Skill', blank=True)            # Many to many relationship with Skill
+    skills = models.ManyToManyField('Skill', blank=True)            
     
 
     def __str__(self):
@@ -77,6 +76,10 @@ class Application(models.Model):
     candidate=models.ForeignKey(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=100)#name as per govtid/certificate
     aadhar=models.CharField(max_length=12)
+    mobile=models.CharField(max_length=12)
+    email=models.EmailField(null=True)
+    notice_period=models.CharField(max_length=10)
+
     applied_on=models.DateTimeField(auto_now_add=True)
 
 
@@ -112,3 +115,28 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Question(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    question_text = models.TextField()
+    option_a = models.CharField(max_length=200)
+    option_b = models.CharField(max_length=200)
+    option_c = models.CharField(max_length=200)
+    option_d = models.CharField(max_length=200)
+    correct_option = models.CharField(max_length=1, choices=[('A','A'),('B','B'),('C','C'),('D','D')])
+
+class TestResult(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    correct_count = models.IntegerField()
+    incorrect_count = models.IntegerField()
+    taken_on = models.DateTimeField(auto_now_add=True)

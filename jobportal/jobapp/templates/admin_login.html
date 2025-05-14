@@ -7,7 +7,20 @@
 
 </head>
 <body>
-    <h2>Admin Login</h2>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">JobPortal</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'job_search' %}">Jobs</a></li>
+            <li><a href="{% url 'user_login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Register</a></li>
+            <li><a href="{% url 'contact' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'company_register' %}">Company Registration</a></li>
+        </ul>
+    </nav>
+    <h2  style="text-align: center;">Admin Login</h2>
     {% if messages %}
         {% for message in messages %}
             <p style="color: red;">{{ message }}</p>

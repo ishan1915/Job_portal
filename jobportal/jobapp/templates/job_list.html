@@ -1,20 +1,29 @@
-<!-- job_list.html -->
-
-{% block content %}
-    <h1>Job Listings</h1>
-    {% if jobs %}
-        <ul>
-            {% for job in jobs %}
-                <li>
-                    <h3>{{ job.title }}</h3>
-                    <p>{{ job.description }}</p>
-                    <p><strong>Location:</strong> {{ job.location }}</p>
-                    <p><strong>Closing Date:</strong> {{ job.closing_date }}</p>
-                    <a href="{% url 'apply_for_job' job.id %}">Apply Now</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No job postings available.</p>
-    {% endif %}
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Listings</title>
+    <link rel="stylesheet" href="{% static 'jobapp/job_list.css' %}">
+</head>
+<body>
+    <div class="job-list-container">
+        <h1>Job Listings</h1>
+        {% if jobs %}
+            <ul class="job-list">
+                {% for job in jobs %}
+                    <li class="job-card">
+                        <h3>{{ job.title }}</h3>
+                        <p>{{ job.description }}</p>
+                        <p><strong>Location:</strong> {{ job.location }}</p>
+                        <p><strong>Closing Date:</strong> {{ job.closing_date }}</p>
+                        <a href="{% url 'apply_for_job' job.id %}" class="apply-btn">Apply Now</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-jobs">No job postings available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,10 +1,30 @@
-/* dashboard.css */
+/* companydash.css */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f4f7fa;
     margin: 0;
     padding: 0;
+}
+.navbar {
+    width: 100%;
+    background: #2c3e50;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    background: #1abc9c;
 }
 
 .container {
@@ -63,4 +83,21 @@ h2 {
 .empty {
     color: #999;
     font-style: italic;
+}
+/* Navbar */
+.navbar {
+    background-color: #1e1f26;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.navbar a {
+    color: white;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: #00bcd4;
 }

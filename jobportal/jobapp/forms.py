@@ -15,14 +15,18 @@ class SignupForm(UserCreationForm):
         fields = ['username','email','password1','password2']
 
 
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label='Username')
     password = forms.CharField(widget=forms.PasswordInput)
 
+
+
+
 class UserDetailForm(forms.ModelForm):
     class Meta:
         model = UserDetail
-        fields = ['firstname', 'lastname', 'contact', 'email','address','profile_photo']
+        fields = ['name',  'contact', 'email','address','profile_photo']
 
 
 
@@ -64,7 +68,7 @@ class JobForm(forms.ModelForm):
 class ApplicationForm(forms.ModelForm):
     class Meta:
         model=Application
-        fields=['name','aadhar']         
+        fields=['name','aadhar','mobile','email','notice_period']         
 
 
 

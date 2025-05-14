@@ -1,12 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details of {{ resume.name }}</title>
+    <link rel="stylesheet" href="{% static 'jobapp/qwerty.css' %}">
 </head>
 <body>
     <h1>Details of {{ resume.name }}</h1>
+
     <h2>Contact Information:</h2>
     <p>Contact: {{ resume.contact }}</p>
     <p>Email: {{ resume.email }}</p>
@@ -18,6 +21,24 @@
             <li>{{ skill.name }}</li>
         {% empty %}
             <li>No skills listed.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Education:</h2>
+    <ul>
+        {% for edu_item in edu %}
+            <li>{{ edu_item.degree_name }} from {{ edu_item.university_name }} in year {{ edu_item.year_of_passing }}</li>
+        {% empty %}
+            <li>No education details available.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Certifications:</h2>
+    <ul>
+        {% for cert_item in cert %}
+            <li>{{ cert_item.certification_name }} - {{ cert_item.issued_by }} ({{ cert_item.issued_on }})</li>
+        {% empty %}
+            <li>No certifications found.</li>
         {% endfor %}
     </ul>
 

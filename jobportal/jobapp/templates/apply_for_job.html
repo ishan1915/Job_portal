@@ -1,14 +1,24 @@
-<!-- apply_for_job.html -->
- 
-{% block content %}
-    <h1>Apply for Job: {{ job.title }}</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply for {{ job.title }}</title>
+    <link rel="stylesheet" href="{% static 'jobapp/apply.css' %}">
+</head>
+<body>
+    <div class="apply-container">
+        <h1>Apply for Job: <span>{{ job.title }}</span></h1>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit Application</button>
-    </form>
+        <form method="post" enctype="multipart/form-data" class="apply-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Application</button>
+        </form>
 
-    <br>
-    <a href="{% url 'job_list' %}">Back to Job Listings</a>
-{% endblock %}
+        <div class="back-link">
+            <a href="{% url 'job_list' %}">&larr; Back to Job Listings</a>
+        </div>
+    </div>
+</body>
+</html>

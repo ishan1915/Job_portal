@@ -3,9 +3,14 @@
 <html>
 <head>
     <title>Edit Candidate</title>
-    <link rel="stylesheet" href="{% static 'jobapp/edit_candidate.css' %}">
+    <link rel="stylesheet" href="{% static 'jobapp/postt.css' %}">
 </head>
 <body>
+    <div class="navbar" ,align-items="top">
+        <a href="{% url 'user_logout' %}">Logout</a>
+        <a href="{% url 'post_job' %}">Post Job</a>
+        <a href="{% url 'company_dashboard' %}">Company Dashboard</a>
+    </div>
     <div class="form-wrapper">
         <h2>Post Job</h2>
         <form method="post" >

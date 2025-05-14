@@ -1,6 +1,4 @@
 {% load static %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,40 +12,41 @@
         <nav>
             <a href="{% url 'resume_view' %}">Resume View</a>
             <a href="{% url 'resume_edit' %}">Resume Edit</a>
-            <a href="{% url 'add_education' %}">Add education</a>
-            <a href="{% url 'add_certification' %}">Add certificate</a>
+            <a href="{% url 'add_education' %}">Add Education</a>
+            <a href="{% url 'add_certification' %}">Add Certificate</a>
             <a href="{% url 'job_list' %}">Job List</a>
-            <a href="{% url 'user_logout' %}">Logout</a>
+            <a href="{% url 'select_subject' %}">Skill Assesment</a>
 
+            <a href="{% url 'user_logout' %}">Logout</a>
         </nav>
     </header>
+
     <main class="main">
         <div class="details">
             {% block content %}
-                <h2>Profile</h2>
+                <h2 class="center-heading">Profile</h2>
                 {% if user_detail %}
-                    <p>First Name: {{ user_detail.firstname }}</p>
-                    <p>Last Name: {{ user_detail.lastname }}</p>
-                    <p>Contact: {{ user_detail.contact }}</p>
-                    <p>Address: {{ user_detail.address }}</p>
-                    {% if user_detail.profile_photo %}
-                         <div id="pp" > <img src="{{ user_detail.profile_photo.url }}" alt="Profile Photo" class="pp" width="100"> </div>
+                    <div class="profile-container">
+                        <div class="profile-details">
+                            <p><strong>First Name:</strong> {{ user_detail.name }}</p>
+                            <p><strong>Email:</strong> {{ user_detail.email }}</p>
+                            <p><strong>Contact:</strong> {{ user_detail.contact }}</p>
+                            <p><strong>Address:</strong> {{ user_detail.address }}</p>
+                            <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+                        </div>
+                        {% if user_detail.profile_photo %}
+                            <div class="profile-photo">
+                                <img src="{{ user_detail.profile_photo.url }}" alt="Profile Photo">
+                            </div>
                         {% else %}
                             <p>No profile photo uploaded</p>
                         {% endif %}
-                    <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
+                    </div>
                 {% else %}
                     <p>No profile details found.</p>
                     <a href="{% url 'candidate_edit' user.id %}">Edit Profile</a>
-
-
-
-                    
-                        
-                    
-                    
                 {% endif %}
-            {%endblock%}
+            {% endblock %}
         </div>
     </main>
 </body>
