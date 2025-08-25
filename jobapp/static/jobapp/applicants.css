@@ -1,0 +1,91 @@
+/* applicants.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+h1 span {
+    color: #2980b9;
+}
+
+h2 {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+.job-desc p {
+    background: #f1f4f8;
+    padding: 15px;
+    border-left: 4px solid #3498db;
+    border-radius: 6px;
+}
+
+.applicants ul {
+    list-style: none;
+    padding: 0;
+}
+
+.applicants li {
+    background: #ecf0f3;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-left: 4px solid #2ecc71;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.applicants li:hover {
+    background: #d9eaf1;
+}
+
+.applicants a {
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.applied-date {
+    display: block;
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.empty {
+    font-style: italic;
+    color: #888;
+}
+
+.back-link {
+    margin-top: 30px;
+}
+
+.back-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
